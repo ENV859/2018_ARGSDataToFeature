@@ -14,6 +14,24 @@
 import sys, os, arcpy
 
 # Set input variables (Hard-wired)
-#inputFile = 'V:/ARGOSTracking/Data/ARGOSData/1997dg.txt'
-#outputFC = "V:/ARGOSTracking/Scratch/ARGOStrack.shp"
+inputFile = 'V:/ARGOSTracking/Data/ARGOSData/1997dg.txt'
+outputFC = "V:/ARGOSTracking/Scratch/ARGOStrack.shp"
 
+# Open the ARGOS data file for reading
+inputFileObj = open(inputFile,'r')
+
+# Get the first line so we can loop
+lineString = inputFileObj.readline()
+while lineString:
+    # Set code to run only if the line contains "Date :"
+    if "Date :" in lineString:
+
+        #Split the line string into a list
+        lineList = lineString.split()
+
+        #Get attributes from first line
+        tagID = lineList[0]
+        break
+    
+    #Get the next line
+    lineString = inputFileObj.readline()
